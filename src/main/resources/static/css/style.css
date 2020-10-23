@@ -1,0 +1,16 @@
+.navbar-brand{
+	padding: 12px;
+}
+
+.panel-default {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.new{
+	float:right;
+}
+
+.new-header{
+	float: left;
+}
