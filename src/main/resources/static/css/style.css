@@ -7,7 +7,7 @@
 	margin-right: 10px;
 }
 
-.new{
+.neww{
 	float:right;
 }
 
@@ -18,5 +18,9 @@
 .alert {
 	margin-left: 10px;
 	margin-right: 10px;
+	margin-top: 10px;
+}
+
+.clearfix {
 	margin-top: 10px;
 }

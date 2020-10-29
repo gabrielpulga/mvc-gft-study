@@ -4,23 +4,30 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
 public class Titulo {
 
-    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private Long codigo;
 
+    @NotBlank(message = "Descrição é obrigatória.")
+    @Size(max = 60, message = "A descrição não pode conter mais de 60 caracteres")
     private String descricao;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
+    @NotNull(message = "Data de vencimento não pode ser nula")
     private Date dataVencimento;
 
-    @NumberFormat(pattern = "#, ##0.00")
+    @NotNull(message = "Valor não pode ser nulo.")
+    @DecimalMin(value = "0.01", message = "Valor não pode ser menor que 0,01.")
+    @DecimalMax(value = "9999999.99", message = "Valor não pode ser maior que 9.999.999,99.")
+    @NumberFormat(pattern = "#,##0.00")
     private BigDecimal valor;
 
     @Enumerated(EnumType.STRING)
@@ -64,5 +71,16 @@ public class Titulo {
 
     public void setStatusTitulo(StatusTitulo statusTitulo) {
         this.statusTitulo = statusTitulo;
+    }
+
+    @Override
+    public String toString() {
+        return "Titulo{" +
+                "codigo=" + codigo +
+                ", descricao='" + descricao + '\'' +
+                ", dataVencimento=" + dataVencimento +
+                ", valor=" + valor +
+                ", statusTitulo=" + statusTitulo +
+                '}';
     }
 }
