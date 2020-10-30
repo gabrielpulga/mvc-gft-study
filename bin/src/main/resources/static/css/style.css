@@ -1,0 +1,26 @@
+.navbar-brand{
+	padding: 12px;
+}
+
+.panel-default {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.neww{
+	float:right;
+}
+
+.new-header{
+	float: left;
+}
+
+.alert {
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 10px;
+}
+
+.clearfix {
+	margin-top: 10px;
+}
