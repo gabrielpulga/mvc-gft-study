@@ -7,8 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-datepicker.standalone.min.css"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.css"
-          rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet"/>
 
 </head>
 
@@ -51,9 +50,8 @@
                     de Vencimento</label>
                 <div class="col-sm-2">
                     <input type="text" class="form-control" id="dataVencimento" th:field="*{dataVencimento}"
-                           data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
-                           data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"
-                           autocomplete="off"/>
+                        data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
+                        data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom" autocomplete="off"/>
                 </div>
             </div>
 
@@ -67,7 +65,7 @@
                 <label for="status" class="col-sm-2 col-form-label">Status</label>
 
                 <div class="col-sm-2">
-                    <select class="form-control" name="status" id="status">
+                    <select class="form-control" name="statusTitulo" id="status">
                         <option th:each="status : ${todosStatusTitulo}" th:value="${status}"
                                 th:text="${status.descricao}"></option>
                     </select>

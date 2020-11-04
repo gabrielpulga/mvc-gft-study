@@ -3,6 +3,7 @@ package com.gft.mvc.controller;
 import com.gft.mvc.model.StatusTitulo;
 import com.gft.mvc.model.Titulo;
 import com.gft.mvc.repo.TitulosRepository;
+import com.gft.mvc.service.CadastroTituloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
@@ -10,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,6 +24,9 @@ public class TituloController {
 
     @Autowired
     private TitulosRepository titulosRepository;
+
+    @Autowired
+    private CadastroTituloService cadastroTituloService;
 
     @RequestMapping("/novo")
     public ModelAndView novo() {
@@ -42,23 +43,23 @@ public class TituloController {
 
         try {
             // TODO: Salvar no banco de dados
-            titulosRepository.save(titulo);
+            cadastroTituloService.salvar(titulo);
 
             redirectAttributes.addFlashAttribute("mensagem", "Titulo salvo com sucesso.");
             return "redirect:/titulos/novo";
-        } catch (DataIntegrityViolationException e) {
-            errors.rejectValue("dataVencimento", null, "Formato de data inválido");
+        } catch (IllegalArgumentException e) {
+            errors.rejectValue("dataVencimento", null, e.getMessage());
             return "CadastroTitulo";
         }
     }
 
     @RequestMapping
-    public ModelAndView pesquisar() {
-        List<Titulo> todosTitulos = titulosRepository.findAll();
+    public ModelAndView pesquisar(@RequestParam(defaultValue = "" +
+            "") String descricao) {
+        List<Titulo> todosTitulos = titulosRepository.findTitulosByDescricaoContaining(descricao);
 
         ModelAndView modelAndView = new ModelAndView("PesquisaTitulos");
         modelAndView.addObject("titulos", todosTitulos);
-        System.out.println(todosTitulos);
         return modelAndView;
     }
 
@@ -74,7 +75,7 @@ public class TituloController {
 
     @RequestMapping(value = "{codigo}", method = RequestMethod.DELETE)
     public String excluir(@PathVariable Long codigo, RedirectAttributes redirectAttributes) {
-        titulosRepository.deleteById(codigo);
+        cadastroTituloService.excluir(codigo);
 
         redirectAttributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
         return "redirect:/titulos";

@@ -27,7 +27,28 @@
         </div>
     </div>
 
-    <div class="card-body card-bordered">
+    <div class="card-body">
+        <form method="GET" class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-4">
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Qual título você está procurando?" autofocus="autofocus" name="descricao"/>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-light">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search"
+                                     fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd"
+        d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+  <path fill-rule="evenodd"
+        d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+</svg>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+
         <table class="table">
             <thead class="thead-light">
             <tr>
@@ -46,10 +67,10 @@
                 <td th:text="${titulo.descricao}"></td>
                 <td th:text="${{titulo.dataVencimento}}"></td>
                 <td th:text="${{titulo.valor}}"></td>
-                <td th:text="${titulo.statusTitulo.descricao6}"></td>
+                <td th:text="${titulo.statusTitulo}"></td>
                 <td>
                     <a class="btn btn-primary" role="button" th:href="@{/titulos/{codigo}(codigo=${titulo.codigo})}"
-                       title="Editar" >
+                       title="Editar">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-fill" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
